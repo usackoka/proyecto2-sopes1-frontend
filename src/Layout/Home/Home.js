@@ -9,11 +9,10 @@ class homeLayout extends Component {
         <Container>
           <Navbar bg="dark" variant="dark" fixed="top">
             <Container>
-              <Navbar.Brand>SOPES1 - 201503712 - PROYECTO 1</Navbar.Brand>
+              <Navbar.Brand>SOPES1 - PROYECTO 2</Navbar.Brand>
             </Container>
           </Navbar>
         </Container>
-  
         <ViewHome/>
       </Fragment>
     );

@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Tabs, Tab, Row, Col, Button } from "react-bootstrap";
-import apiGet from "../../services/apiGet";
 
 import {
   SparklineComponent,
