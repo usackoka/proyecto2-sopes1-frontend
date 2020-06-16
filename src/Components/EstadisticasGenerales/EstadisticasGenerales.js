@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { Tabs, Tab, Row, Col, Button } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 
-const Index = (props) => {
+const EstadisticasGenerales = (props) => {
 
   const [formData,setFormData] = useState([
 
@@ -32,4 +32,4 @@ const Index = (props) => {
   );
 };
 
-export default Index;
+export default EstadisticasGenerales;

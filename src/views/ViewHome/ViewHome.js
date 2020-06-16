@@ -2,10 +2,11 @@ import React, { Fragment, useState } from "react";
 import { Tabs, Tab } from "react-bootstrap";
 import EstadisticasGenerales from "../../Components/EstadisticasGenerales/EstadisticasGenerales" ;
 import TopAfectados from "../../Components/TopAfectados/TopAfectados"
-import Graficas from "../../Components/Graficas/Graficas";
+import GraficaPie from "../../Components/Graficas/GraficaPie";
+import GraficaBarras from "../../Components/Graficas/GraficaBarras"
 
 const Index = (props) => {
-  const [key, setKey] = useState('monCPU');
+  const [key, setKey] = useState('monRam');
 
   return (
     <Fragment>
@@ -26,10 +27,9 @@ const Index = (props) => {
         </Tab>
         <Tab eventKey="monRam" title="Graficas">
           <br></br>
-          <Graficas/>
+          <GraficaBarras/>
         </Tab>
       </Tabs>
-    
     </Fragment>
   );
 };

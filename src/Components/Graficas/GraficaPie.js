@@ -8,7 +8,7 @@ import {
   } from '@syncfusion/ej2-react-charts';
   import{ EmitType } from '@syncfusion/ej2-base';
 
-const Index = (props) => {
+const GraficaPie = (props) => {
   const [formData, setFormData] = useState([
     { 'x': 'Chrome', y: 37 }, { 'x': 'UC Browser', y: 17 },
     { 'x': 'iPhone', y: 19 }, { 'x': 'Others', y: 4, text: '4' },
@@ -37,7 +37,7 @@ const Index = (props) => {
       tooltipRender={tooltipRender}>
       <Inject services={[AccumulationTooltip, PieSeries, AccumulationDataLabel]} />
       <AccumulationSeriesCollectionDirective>
-        <AccumulationSeriesDirective dataSource={formData} xName='x' yName='y' radius='70%' dataLabel={datalabel}>
+        <AccumulationSeriesDirective dataSource={formData} xName='x' yName='y' radius='100%' dataLabel={datalabel}>
         </AccumulationSeriesDirective>
       </AccumulationSeriesCollectionDirective>
     </AccumulationChartComponent>
@@ -45,4 +45,4 @@ const Index = (props) => {
   );
 };
 
-export default Index;
+export default GraficaPie;

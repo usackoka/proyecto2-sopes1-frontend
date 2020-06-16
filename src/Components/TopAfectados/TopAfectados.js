@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Tabs, Tab, Row, Col, Button } from "react-bootstrap";
 
-const Index = (props) => {
+const TopAfectados = (props) => {
   const [formData, setFormData] = useState([]);
 
   useEffect(() => {
@@ -19,4 +19,4 @@ const Index = (props) => {
   );
 };
 
-export default Index;
+export default TopAfectados;
