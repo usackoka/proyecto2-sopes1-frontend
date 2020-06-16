@@ -2,19 +2,25 @@ import React, { Fragment, useState, useEffect } from "react";
 import { Tabs, Tab, Row, Col, Button } from "react-bootstrap";
 
 import {
-  SparklineComponent,
-  Inject,
-  SparklineTooltip,
-} from "@syncfusion/ej2-react-charts";
+  AccumulationChartComponent, AccumulationSeriesCollectionDirective, AccumulationSeriesDirective,
+    IAccTooltipRenderEventArgs, Inject, AccumulationDataLabel, AccumulationTooltip, PieSeries,
+    AccumulationDataLabelSettingsModel,TooltipSettingsModel
+  } from '@syncfusion/ej2-react-charts';
+  import{ EmitType } from '@syncfusion/ej2-base';
 
 const Index = (props) => {
   const [formData, setFormData] = useState([
-    { x: 2, y: 3 },
-    { x: 1, y: 5 },
-    { x: 5, y: 2 },
-    { x: "Thu", y: 4 },
-    { x: "Fri", y: 6 },
+    { 'x': 'Chrome', y: 37 }, { 'x': 'UC Browser', y: 17 },
+    { 'x': 'iPhone', y: 19 }, { 'x': 'Others', y: 4, text: '4' },
+    { 'x': 'Opera', y: 11 }
   ]);
+
+  let datalabel = { visible: true, position: 'Inside', name: 'text' };
+  let tooltip = { enable: true };
+  let tooltipRender = (args) => {
+    let value = args.point.y / args.series.sumOfPoints * 100;
+    args.text = args.point.x + '' + Math.ceil(value) + '' + '%';
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -27,40 +33,14 @@ const Index = (props) => {
 
   return (
     <Fragment>
-      <SparklineComponent
-        id="sparkline2"
-        height="800px"
-        width="1500px"
-        fill="#033e96"
-        valueType="Category"
-        xName="x"
-        yName="y"
-        dataSource={formData}
-        axisSettings={{
-          // To configure axis line settings
-          lineSettings: {
-            visible: true,
-            color: "#ff14ae",
-            dashArray: 5,
-          },
-        }}
-        markerSettings={{
-          visible: ["All"],
-        }}
-        dataLabelSettings={{
-          visible: ["All"],
-        }}
-        tooltipSettings={{
-          visible: true,
-          format: "${x} : ${y}",
-          fill: "#033e96",
-          textStyle: {
-            color: "white",
-          },
-        }}
-      >
-        <Inject services={[SparklineTooltip]} />
-      </SparklineComponent>
+       <AccumulationChartComponent id='charts' tooltip={tooltip} title='Mobile Browser Statistics'
+      tooltipRender={tooltipRender}>
+      <Inject services={[AccumulationTooltip, PieSeries, AccumulationDataLabel]} />
+      <AccumulationSeriesCollectionDirective>
+        <AccumulationSeriesDirective dataSource={formData} xName='x' yName='y' radius='70%' dataLabel={datalabel}>
+        </AccumulationSeriesDirective>
+      </AccumulationSeriesCollectionDirective>
+    </AccumulationChartComponent>
     </Fragment>
   );
 };
