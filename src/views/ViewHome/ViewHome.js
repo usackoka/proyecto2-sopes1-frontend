@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from "react";
 import { Tabs, Tab } from "react-bootstrap";
-import Procesos from "../../Components/Procesos/Procesos" ;
-import CPU from "../../Components/CPU/CPU" ;
-import RAM from "../../Components/RAM/RAM";
+import EstadisticasGenerales from "../../Components/EstadisticasGenerales/EstadisticasGenerales" ;
+import TopAfectados from "../../Components/TopAfectados/TopAfectados"
+import Graficas from "../../Components/Graficas/Graficas";
 
 const Index = (props) => {
   const [key, setKey] = useState('monCPU');
@@ -16,17 +16,17 @@ const Index = (props) => {
         activeKey={key}
         onSelect={(k) => setKey(k)}
       >
-        <Tab eventKey="procs" title="Procesos">
+        <Tab eventKey="procs" title="Estadísticas Generales">
           <br></br>
-          <Procesos/>
+          <EstadisticasGenerales/>
         </Tab>
-        <Tab eventKey="monCPU" title="Monitor CPU">
+        <Tab eventKey="monCPU" title="Top Afectados">
           <br></br>
-          <CPU/>
+          <TopAfectados/>
         </Tab>
-        <Tab eventKey="monRam" title="Monitor RAM">
+        <Tab eventKey="monRam" title="Graficas">
           <br></br>
-          <RAM/>
+          <Graficas/>
         </Tab>
       </Tabs>
     
