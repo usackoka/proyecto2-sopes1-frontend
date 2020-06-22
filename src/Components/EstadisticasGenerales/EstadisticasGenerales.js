@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Tabs, Tab, Row, Col, Button } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
+import apiGet from "../../services/apiGet"
 
 const EstadisticasGenerales = (props) => {
 
@@ -14,11 +15,11 @@ const EstadisticasGenerales = (props) => {
 
   useEffect(()=>{
     const getData = async () => {
+      const data = await apiGet.generalData.getCasos();
+      console.log("CASOS: ",data)
     }
-
-    if(!formData.llenado){
-      getData()
-    }
+    
+    getData()
   },[])
 
   return (

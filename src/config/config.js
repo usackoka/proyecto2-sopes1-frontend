@@ -1,3 +1,3 @@
 module.exports = {
-    baseApi : "http://localhost:8080/"
+    baseApi : "http://quetzal.digital:3000/api/"
 };
