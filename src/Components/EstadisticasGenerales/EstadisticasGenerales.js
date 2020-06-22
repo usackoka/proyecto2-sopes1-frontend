@@ -11,7 +11,12 @@ class EstadisticasGenerales extends React.Component {
         {departamento:"",edad:0,estado:"",forma_contagio:"",nombre:""}
       ]
     }
-    
+
+    //recupero por primera vez la información general
+    this.tick()
+  }
+
+  tick(){
     const getData = async () => {
       console.log("instanciando ")
       const data = await apiGet.generalData.getCasos();
@@ -19,6 +24,15 @@ class EstadisticasGenerales extends React.Component {
     }
     
     getData()
+  }
+
+  componentDidMount(){
+    //actualizar cada 5 segundos
+    this.interval = setInterval(() => this.tick(), 5000);
+  }
+
+  componentWillMount(){
+    clearInterval(this.interval);
   }
 
   render(){
