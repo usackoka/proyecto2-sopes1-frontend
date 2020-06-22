@@ -16,6 +16,9 @@ const api = {
   generalData: {
     async getCasos() {
       return await getApi(baseApi + "caso/list");
+    },
+    async getTopCasos() {
+      return await getApi(baseApi + "caso/topCasos");
     }
   }
 };
