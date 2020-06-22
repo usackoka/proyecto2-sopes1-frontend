@@ -6,7 +6,7 @@ import GraficaPie from "../../Components/Graficas/GraficaPie";
 import GraficaBarras from "../../Components/Graficas/GraficaBarras"
 
 const Index = (props) => {
-  const [key, setKey] = useState('monRam');
+  const [key, setKey] = useState('procs');
 
   return (
     <Fragment>
