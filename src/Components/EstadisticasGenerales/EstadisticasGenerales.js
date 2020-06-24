@@ -9,6 +9,7 @@ class EstadisticasGenerales extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      date: new Date(),
       formData:[
         {departamento:"",edad:0,estado:"",forma_contagio:"",nombre:""}
       ],
@@ -35,7 +36,7 @@ class EstadisticasGenerales extends React.Component {
         top--
         if(top==0) break;
       }
-      this.setState({...this.state,formData2:listCasos})
+      this.setState({...this.state,formData2:listCasos,date:new Date()})
     }
     
     getData()
@@ -66,6 +67,7 @@ class EstadisticasGenerales extends React.Component {
 
     return (
       <Fragment>
+        <h2>Ultima actualización: {this.state.date}</h2>
         <h1>Top Departamentos Afectados</h1>
         <BootstrapTable
           keyField="tbl_top"
