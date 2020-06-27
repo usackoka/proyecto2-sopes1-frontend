@@ -19,7 +19,10 @@ const api = {
     },
     async getTopCasos() {
       return await getApi(baseApi + "caso/topCasos");
-    }
+    },
+    async getCasosPie() {
+      return await getApi(baseApi + "caso/getPie");
+    },
   }
 };
 

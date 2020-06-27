@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
@@ -9,7 +9,7 @@ class EstadisticasGenerales extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      date: new Date(),
+      date: new Date()+"",
       formData:[
         {departamento:"",edad:0,estado:"",forma_contagio:"",nombre:""}
       ],
@@ -24,7 +24,6 @@ class EstadisticasGenerales extends React.Component {
 
   tick(){
     const getData = async () => {
-      console.log("instanciando ")
       const data = await apiGet.generalData.getCasos();
       this.setState({...this.state,formData:data.data})
       const data2 = await apiGet.generalData.getTopCasos();
@@ -36,7 +35,7 @@ class EstadisticasGenerales extends React.Component {
         top--
         if(top==0) break;
       }
-      this.setState({...this.state,formData2:listCasos,date:new Date()})
+      this.setState({...this.state,formData2:listCasos,date:new Date()+""})
     }
     
     getData()
