@@ -43,7 +43,7 @@ class EstadisticasGenerales extends React.Component {
 
   componentDidMount(){
     //actualizar cada 5 segundos
-    this.interval = setInterval(() => this.tick(), 5000);
+    this.interval = setInterval(() => this.tick(), 240000);
   }
 
   componentWillMount(){
