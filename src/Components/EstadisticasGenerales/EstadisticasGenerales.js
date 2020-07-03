@@ -3,6 +3,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import apiGet from "../../services/apiGet"
+import { Button } from "react-bootstrap";
 
 class EstadisticasGenerales extends React.Component {
 
@@ -10,6 +11,7 @@ class EstadisticasGenerales extends React.Component {
     super(props);
     this.state = {
       date: new Date()+"",
+      minutos:10,
       formData:[
         {departamento:"",edad:0,estado:"",forma_contagio:"",nombre:""}
       ],
@@ -42,8 +44,9 @@ class EstadisticasGenerales extends React.Component {
   }
 
   componentDidMount(){
-    //actualizar cada 5 segundos
-    this.interval = setInterval(() => this.tick(), 240000);
+    //actualizar cada 10 minutos
+    let milisegundos = this.state.minutos * 60 /*segundos*/ * 1000 /*milisegundos*/;
+    this.interval = setInterval(() => this.tick(), milisegundos);
   }
 
   componentWillMount(){
@@ -67,6 +70,9 @@ class EstadisticasGenerales extends React.Component {
     return (
       <Fragment>
         <h2>Ultima actualización: {this.state.date}</h2>
+        <h3>Actualizando cada {this.state.minutos} minutos</h3>
+        <Button onClick={()=>{this.tick()}}>Actualización automática</Button>
+        {""}
         <h1>Top Departamentos Afectados</h1>
         <BootstrapTable
           keyField="tbl_top"
