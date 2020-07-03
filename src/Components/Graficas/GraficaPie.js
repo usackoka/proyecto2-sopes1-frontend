@@ -34,7 +34,6 @@ class GraficaPie extends React.Component {
   render() {
     return (
       <Fragment>
-        <h3>Gráfica Pie</h3>
         <AccumulationChartComponent
           id="charts"
           tooltip={this.tooltip}

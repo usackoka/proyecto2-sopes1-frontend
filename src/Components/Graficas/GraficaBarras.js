@@ -54,7 +54,6 @@ class GraficaBarras extends React.Component {
   render() {
     return (
       <Fragment>
-        <h3>Estadísticas Generales - Gráfico</h3>
         <ChartComponent
           id="charts"
           primaryXAxis={this.primaryxAxis}

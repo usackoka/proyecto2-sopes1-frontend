@@ -5,7 +5,7 @@ import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import GraficaPie from "../../Components/Graficas/GraficaPie";
 import GraficaBarras from "../../Components/Graficas/GraficaBarras"
 import apiGet from "../../services/apiGet"
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 
 class EstadisticasGenerales extends React.Component {
 
@@ -19,7 +19,13 @@ class EstadisticasGenerales extends React.Component {
       ],
       formData2:[
         {departamento:"",cantidad:0}
-      ]
+      ],
+      nameGraph:"Gráfico de Barras",
+      nameGraph2:"Gráfico de Pie",
+      grafico:null,
+      graficoBarras:<Spinner animation="border"/>,
+      graficoPie:<Spinner animation="border"/>,
+      noGraph:0,
     }
 
     //recupero por primera vez la información general
@@ -40,6 +46,15 @@ class EstadisticasGenerales extends React.Component {
         if(top==0) break;
       }
       this.setState({...this.state,formData2:listCasos,date:new Date()+""})
+
+      //cargo el gráfico de barras
+      this.graficoBarras = <GraficaBarras/>
+      
+      //cargo el gráfico de pie
+      this.graficoPie = <GraficaPie/>
+
+      this.noGraph = 0;
+      this.setState({...this.state,grafico:this.graficoBarras})
     }
     getData()
   }
@@ -73,7 +88,8 @@ class EstadisticasGenerales extends React.Component {
         <h2>Ultima actualización: {this.state.date}</h2>
         <h3>Actualizando cada {this.state.minutos} minutos</h3>
         <Button onClick={()=>{this.tick()}}>Actualización automática</Button>
-        {""}
+        <br></br>
+        <br></br>
         <h1>Top Departamentos Afectados</h1>
         <BootstrapTable
           keyField="tbl_top"
@@ -91,8 +107,19 @@ class EstadisticasGenerales extends React.Component {
           filter={filterFactory()}
           pagination={paginationFactory()}
           />
-          
-        <GraficaPie/>
+        <br></br>
+        <br></br>
+        <Button onClick={()=>{
+          this.setState({...this.state,
+            nameGraph:this.state.nameGraph2, 
+            nameGraph2:this.state.nameGraph,
+            grafico: this.noGraph===0? this.graficoPie : this.graficoBarras
+          })
+          this.noGraph = this.noGraph === 0? 1:0
+        }}>{"Ver "+this.state.nameGraph2}</Button>
+        <br></br>
+        <h1>{"Estadísticas Generales - "+this.state.nameGraph}</h1>
+        {this.state.grafico}
       </Fragment>
     );
   }
