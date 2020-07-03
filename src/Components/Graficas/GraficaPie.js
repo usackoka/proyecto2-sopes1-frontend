@@ -38,10 +38,10 @@ class GraficaPie extends React.Component {
     };
     return (
       <Fragment>
+        <h3>Gráfica Pie</h3>
         <AccumulationChartComponent
           id="charts"
           tooltip={tooltip}
-          title="Mobile Browser Statistics"
           tooltipRender={tooltipRender}
         >
           <Inject

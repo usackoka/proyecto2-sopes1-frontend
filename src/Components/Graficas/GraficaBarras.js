@@ -2,47 +2,106 @@ import React, { Fragment, useState, useEffect } from "react";
 import { Tabs, Tab, Row, Col, Button } from "react-bootstrap";
 
 import {
-  AccumulationChartComponent, AccumulationSeriesCollectionDirective, AccumulationSeriesDirective,
-    IAccTooltipRenderEventArgs, Inject, AccumulationDataLabel, AccumulationTooltip, PieSeries,
-    AccumulationDataLabelSettingsModel,TooltipSettingsModel
-  } from '@syncfusion/ej2-react-charts';
-  import{ EmitType } from '@syncfusion/ej2-base';
+  ChartComponent,
+  SeriesCollectionDirective,
+  SeriesDirective,
+  Inject,
+  Legend,
+  Category,
+  Tooltip,
+  DataLabel,
+  ColumnSeries,
+  Selection,
+} from "@syncfusion/ej2-react-charts";
 
-const GraficaBarras = (props) => {
-  const [formData, setFormData] = useState([
-    { 'x': 'Chrome', y: 37 }, { 'x': 'UC Browser', y: 17 },
-    { 'x': 'iPhone', y: 19 }, { 'x': 'Others', y: 4, text: '4' },
-    { 'x': 'Opera', y: 11 }
-  ]);
-
-  let datalabel = { visible: true, position: 'Inside', name: 'text' };
-  let tooltip = { enable: true };
-  let tooltipRender = (args) => {
-    let value = args.point.y / args.series.sumOfPoints * 100;
-    args.text = args.point.x + '' + Math.ceil(value) + '' + '%';
-  };
-
-  useEffect(() => {
-    const getData = async () => {
+class GraficaBarras extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      formData: [
+        { country: "USA", gold: 50, silver: 70, bronze: 45 },
+        { country: "China", gold: 40, silver: 60, bronze: 55 },
+        { country: "Japan", gold: 70, silver: 60, bronze: 50 },
+        { country: "Australia", gold: 60, silver: 56, bronze: 40 },
+        { country: "France", gold: 50, silver: 45, bronze: 35 },
+        { country: "Germany", gold: 40, silver: 30, bronze: 22 },
+        { country: "Italy", gold: 40, silver: 35, bronze: 37 },
+        { country: "Sweden", gold: 30, silver: 25, bronze: 27 },
+      ],
     };
 
-    if (!formData.llenado) {
-      getData();
-    }
-  }, []);
+    this.primaryxAxis = {
+      valueType: "Category",
+      interval: 1,
+      majorGridLines: { width: 0 },
+    };
+    this.primaryyAxis = {
+      majorGridLines: { width: 0 },
+      majorTickLines: { width: 0 },
+      lineStyle: { width: 0 },
+      labelStyle: { color: "transparent" },
+    };
+    this.marker = {
+      dataLabel: {
+        visible: true,
+        position: "Top",
+        font: { fontWeight: "600", color: "#ffffff" },
+      },
+    };
+    this.tooltip = { enable: true };
+    this.legendSettings = { position: "Top", alignment: "Near" };
+  }
 
-  return (
-    <Fragment>
-       <AccumulationChartComponent id='charts' tooltip={tooltip} title='Mobile Browser Statistics'
-      tooltipRender={tooltipRender}>
-      <Inject services={[AccumulationTooltip, PieSeries, AccumulationDataLabel]} />
-      <AccumulationSeriesCollectionDirective>
-        <AccumulationSeriesDirective dataSource={formData} xName='x' yName='y' radius='100%' dataLabel={datalabel}>
-        </AccumulationSeriesDirective>
-      </AccumulationSeriesCollectionDirective>
-    </AccumulationChartComponent>
-    </Fragment>
-  );
-};
+  render() {
+    return (
+      <Fragment>
+        <ChartComponent
+          id="charts"
+          primaryXAxis={this.primaryxAxis}
+          primaryYAxis={this.primaryyAxis}
+          legendSettings={this.legendSettings}
+          title="Olympic Medals"
+          enableAnimation={true}
+          tooltip={this.tooltip}
+        >
+          <Inject
+            services={[
+              ColumnSeries,
+              Legend,
+              Tooltip,
+              DataLabel,
+              Category,
+              Selection,
+            ]}
+          />
+          <SeriesCollectionDirective>
+            <SeriesDirective
+              dataSource={this.state.formData}
+              xName="country"
+              yName="gold"
+              name="Gold"
+              type="Column"
+            ></SeriesDirective>
+            <SeriesDirective
+              dataSource={this.state.formData}
+              xName="country"
+              yName="silver"
+              name="Silver"
+              type="Column"
+            ></SeriesDirective>
+            <SeriesDirective
+              dataSource={this.state.formData}
+              xName="country"
+              yName="bronze"
+              name="Bronze"
+              type="Column"
+            ></SeriesDirective>
+          </SeriesCollectionDirective>
+        </ChartComponent>
+        ;
+      </Fragment>
+    );
+  }
+}
 
 export default GraficaBarras;
