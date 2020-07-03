@@ -49,6 +49,13 @@ class GraficaBarras extends React.Component {
     };
     this.tooltip = { enable: true };
     this.legendSettings = { position: "Top", alignment: "Near" };
+
+    this.renderFormData();
+  }
+
+  renderFormData(){
+    console.log("INFO EN GRAPH BARRAS")
+    console.log(this.props.data)
   }
 
   render() {
