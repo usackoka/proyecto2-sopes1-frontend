@@ -2,6 +2,8 @@ import React, { Fragment } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
+import GraficaPie from "../../Components/Graficas/GraficaPie";
+import GraficaBarras from "../../Components/Graficas/GraficaBarras"
 import apiGet from "../../services/apiGet"
 import { Button } from "react-bootstrap";
 
@@ -39,7 +41,6 @@ class EstadisticasGenerales extends React.Component {
       }
       this.setState({...this.state,formData2:listCasos,date:new Date()+""})
     }
-    
     getData()
   }
 
@@ -90,6 +91,8 @@ class EstadisticasGenerales extends React.Component {
           filter={filterFactory()}
           pagination={paginationFactory()}
           />
+          
+        <GraficaPie/>
       </Fragment>
     );
   }

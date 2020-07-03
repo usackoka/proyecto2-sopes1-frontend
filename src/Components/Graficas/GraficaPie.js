@@ -1,19 +1,14 @@
-import React, { Fragment, useState, useEffect } from "react";
-import { Tabs, Tab, Row, Col, Button } from "react-bootstrap";
+import React, { Fragment } from "react";
 
 import {
   AccumulationChartComponent,
   AccumulationSeriesCollectionDirective,
   AccumulationSeriesDirective,
-  IAccTooltipRenderEventArgs,
   Inject,
   AccumulationDataLabel,
   AccumulationTooltip,
   PieSeries,
-  AccumulationDataLabelSettingsModel,
-  TooltipSettingsModel,
 } from "@syncfusion/ej2-react-charts";
-import { EmitType } from "@syncfusion/ej2-base";
 
 class GraficaPie extends React.Component {
   constructor(props) {
@@ -27,22 +22,23 @@ class GraficaPie extends React.Component {
         { x: "Opera", y: 11 },
       ],
     };
-  }
-
-  render() {
-    let datalabel = { visible: true, position: 'Inside', name: 'text' };
-    let tooltip = { enable: true };
-    let tooltipRender = (args) => {
+    
+    this.datalabel = { visible: true, position: 'Inside', name: 'text' };
+    this.tooltip = { enable: true };
+    this.tooltipRender = (args) => {
       let value = args.point.y / args.series.sumOfPoints * 100;
       args.text = args.point.x + '' + Math.ceil(value) + '' + '%';
     };
+  }
+
+  render() {
     return (
       <Fragment>
         <h3>Gráfica Pie</h3>
         <AccumulationChartComponent
           id="charts"
-          tooltip={tooltip}
-          tooltipRender={tooltipRender}
+          tooltip={this.tooltip}
+          tooltipRender={this.tooltipRender}
         >
           <Inject
             services={[AccumulationTooltip, PieSeries, AccumulationDataLabel]}
@@ -53,7 +49,7 @@ class GraficaPie extends React.Component {
               xName="x"
               yName="y"
               radius="100%"
-              dataLabel={datalabel}
+              dataLabel={this.datalabel}
             ></AccumulationSeriesDirective>
           </AccumulationSeriesCollectionDirective>
         </AccumulationChartComponent>

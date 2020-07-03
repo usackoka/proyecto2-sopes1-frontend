@@ -1,5 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
-import { Tabs, Tab, Row, Col, Button } from "react-bootstrap";
+import React, { Fragment } from "react";
 
 import {
   ChartComponent,
@@ -55,12 +54,12 @@ class GraficaBarras extends React.Component {
   render() {
     return (
       <Fragment>
+        <h3>Estadísticas Generales - Gráfico</h3>
         <ChartComponent
           id="charts"
           primaryXAxis={this.primaryxAxis}
           primaryYAxis={this.primaryyAxis}
           legendSettings={this.legendSettings}
-          title="Olympic Medals"
           enableAnimation={true}
           tooltip={this.tooltip}
         >
@@ -98,7 +97,6 @@ class GraficaBarras extends React.Component {
             ></SeriesDirective>
           </SeriesCollectionDirective>
         </ChartComponent>
-        ;
       </Fragment>
     );
   }
