@@ -88,7 +88,7 @@ class EstadisticasGenerales extends React.Component {
       <Fragment>
         <h2>Ultima actualización: {this.state.date}</h2>
         <h3>Actualizando cada {this.state.minutos} minutos</h3>
-        <Button onClick={()=>{this.tick()}}>Actualización automática</Button>
+        <Button onClick={()=>{this.tick()}}>Forzar Actualización</Button>
         <br></br>
         <br></br>
         <h1>Top Departamentos Afectados</h1>

@@ -17,15 +17,16 @@ class GraficaBarras extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      estadosCasos : ['Activo','Recuperado','Fallecido'],
       formData: [
-        { country: "USA", gold: 50, silver: 70, bronze: 45 },
-        { country: "China", gold: 40, silver: 60, bronze: 55 },
-        { country: "Japan", gold: 70, silver: 60, bronze: 50 },
-        { country: "Australia", gold: 60, silver: 56, bronze: 40 },
-        { country: "France", gold: 50, silver: 45, bronze: 35 },
-        { country: "Germany", gold: 40, silver: 30, bronze: 22 },
-        { country: "Italy", gold: 40, silver: 35, bronze: 37 },
-        { country: "Sweden", gold: 30, silver: 25, bronze: 27 },
+        { departamento: "Petén", activo: 50, recuperado: 70, fallecido: 45 },
+        { departamento: "Alta Verapaz", activo: 40, recuperado: 60, fallecido: 55 },
+        { departamento: "Totonicapán", activo: 70, recuperado: 60, fallecido: 50 },
+        { departamento: "El Progreso", activo: 60, recuperado: 56, fallecido: 40 },
+        { departamento: "Jalapa", activo: 50, recuperado: 45, fallecido: 35 },
+        { departamento: "Jutiapa", activo: 40, recuperado: 30, fallecido: 22 },
+        { departamento: "Santa Rosa", activo: 40, recuperado: 35, fallecido: 37 },
+        { departamento: "Quiché", activo: 30, recuperado: 25, fallecido: 27 },
       ],
     };
 
@@ -49,13 +50,40 @@ class GraficaBarras extends React.Component {
     };
     this.tooltip = { enable: true };
     this.legendSettings = { position: "Top", alignment: "Near" };
+  }
 
+  componentDidMount(){
+  }
+
+  componentWillMount(){
     this.renderFormData();
   }
 
   renderFormData(){
-    console.log("INFO EN GRAPH BARRAS")
-    console.log(this.props.data)
+      //map clave-departamento valor-conteo
+      const data = this.props.data;
+      const mapSort = new Map()
+      const arrayEstados = []
+      for (const caso of data){
+        mapSort.set(caso.departamento,new Map())
+      }
+      for(const caso of data){
+        if(mapSort.get(caso.departamento).has(caso.estado)){
+          mapSort.get(caso.departamento).set(caso.estado,mapSort.get(caso.departamento).get(caso.estado)+1)
+        }else{
+          mapSort.get(caso.departamento).set(caso.estado,1)
+        }
+        if(!arrayEstados.includes(caso.estado)){
+          arrayEstados.push(caso.estado)
+        }
+      }
+      //lista para cargar en la data
+      let temp = []
+      mapSort.forEach((value,key)=>{
+          let est = Object.fromEntries(value)
+          temp.push({departamento:key,...est})
+      })
+      this.setState({...this.state,formData:temp,estadosCasos:arrayEstados})
   }
 
   render() {
@@ -80,27 +108,17 @@ class GraficaBarras extends React.Component {
             ]}
           />
           <SeriesCollectionDirective>
-            <SeriesDirective
-              dataSource={this.state.formData}
-              xName="country"
-              yName="gold"
-              name="Gold"
-              type="Column"
-            ></SeriesDirective>
-            <SeriesDirective
-              dataSource={this.state.formData}
-              xName="country"
-              yName="silver"
-              name="Silver"
-              type="Column"
-            ></SeriesDirective>
-            <SeriesDirective
-              dataSource={this.state.formData}
-              xName="country"
-              yName="bronze"
-              name="Bronze"
-              type="Column"
-            ></SeriesDirective>
+            {
+              this.state.estadosCasos.map((value, index) => (
+                <SeriesDirective
+                  dataSource={this.state.formData}
+                  xName="departamento"
+                  yName={value}
+                  name={value}
+                  type="Column"
+                ></SeriesDirective>
+              ))
+            }
           </SeriesCollectionDirective>
         </ChartComponent>
       </Fragment>
