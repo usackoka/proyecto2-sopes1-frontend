@@ -31,6 +31,22 @@ class GraficaPie extends React.Component {
     };
   }
 
+  componentDidMount(){
+  }
+
+  componentWillMount(){
+    this.renderFormData();
+  }
+
+  renderFormData(){
+      const data = this.props.data;
+      let temp = []
+      for(const array of data){
+        temp.push({x:array[0],y:array[1]})
+      }
+      this.setState({...this.state,formData:temp})
+  }
+
   render() {
     return (
       <Fragment>

@@ -41,6 +41,9 @@ class EstadisticasGenerales extends React.Component {
       this.graficoBarras = <GraficaBarras data={data.data}/>
 
       const data2 = await apiGet.generalData.getTopCasos();
+      
+      //cargo el gráfico de pie
+      this.graficoPie = <GraficaPie data={data2.data}/>
       //muestro sólo los primeros 3
       var top = 3;
       let listCasos = []
@@ -50,9 +53,6 @@ class EstadisticasGenerales extends React.Component {
         if(top==0) break;
       }
       this.setState({...this.state,formData2:listCasos,date:new Date()+""})
-      
-      //cargo el gráfico de pie
-      this.graficoPie = <GraficaPie/>
 
       this.noGraph = 0;
       this.setState({...this.state,grafico:this.graficoBarras})
