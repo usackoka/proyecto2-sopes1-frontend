@@ -65,23 +65,23 @@ class GraficaBarras extends React.Component {
       const mapSort = new Map()
       const arrayEstados = []
       for (const caso of data){
-        mapSort.set(caso.departamento,new Map())
+        mapSort.set(caso.edad,new Map())
       }
       for(const caso of data){
-        if(mapSort.get(caso.departamento).has(caso.estado)){
-          mapSort.get(caso.departamento).set(caso.estado,mapSort.get(caso.departamento).get(caso.estado)+1)
+        if(mapSort.get(caso.edad).has(caso.departamento)){
+          mapSort.get(caso.edad).set(caso.departamento,mapSort.get(caso.edad).get(caso.departamento)+1)
         }else{
-          mapSort.get(caso.departamento).set(caso.estado,1)
+          mapSort.get(caso.edad).set(caso.departamento,1)
         }
-        if(!arrayEstados.includes(caso.estado)){
-          arrayEstados.push(caso.estado)
+        if(!arrayEstados.includes(caso.departamento)){
+          arrayEstados.push(caso.departamento)
         }
       }
       //lista para cargar en la data
       let temp = []
       mapSort.forEach((value,key)=>{
           let est = Object.fromEntries(value)
-          temp.push({departamento:key,...est})
+          temp.push({edad:key,...est})
       })
       this.setState({...this.state,formData:temp,estadosCasos:arrayEstados})
   }
@@ -111,8 +111,9 @@ class GraficaBarras extends React.Component {
             {
               this.state.estadosCasos.map((value, index) => (
                 <SeriesDirective
+                  key={index}
                   dataSource={this.state.formData}
-                  xName="departamento"
+                  xName="edad"
                   yName={value}
                   name={value}
                   type="Column"
