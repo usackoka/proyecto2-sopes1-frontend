@@ -83,6 +83,7 @@ class GraficaBarras extends React.Component {
           let est = Object.fromEntries(value)
           temp.push({edad:key,...est})
       })
+      temp.sort((a, b) => (a.edad > b.edad) ? 1 : -1)
       this.setState({...this.state,formData:temp,estadosCasos:arrayEstados})
   }
 
