@@ -20,6 +20,9 @@ class EstadisticasGenerales extends React.Component {
       formData2:[
         {departamento:"",cantidad:0}
       ],
+      ultimoDato:[
+        {departamento:"",edad:0,estado:"",forma_contagio:"",nombre:""}
+      ],
       nameGraph:"Gráfico de Barras",
       nameGraph2:"Gráfico de Pie",
       grafico:null,
@@ -35,7 +38,7 @@ class EstadisticasGenerales extends React.Component {
   tick(){
     const getData = async () => {
       const data = await apiGet.generalData.getCasos();
-      this.setState({...this.state,formData:data.data})
+      this.setState({...this.state,formData:data.data,ultimoDato:[data.data[data.data.length]]})
       
       //cargo el gráfico de barras
       this.graficoBarras = <GraficaBarras data={data.data}/>
@@ -102,6 +105,18 @@ class EstadisticasGenerales extends React.Component {
         <BootstrapTable
           keyField="tbl_todos"
           data={this.state.formData}
+          columns={columns}
+          bordered={false}
+          filterPosition="top"
+          filter={filterFactory()}
+          pagination={paginationFactory()}
+          />
+        <br></br>
+        <br></br>
+        <h1>Último caso ingresado</h1>
+        <BootstrapTable
+          keyField="tbl_todos2"
+          data={this.state.ultimoDato}
           columns={columns}
           bordered={false}
           filterPosition="top"
