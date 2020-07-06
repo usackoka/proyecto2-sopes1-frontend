@@ -108,9 +108,6 @@ class EstadisticasGenerales extends React.Component {
           data={this.state.formData}
           columns={columns}
           bordered={false}
-          filterPosition="top"
-          filter={filterFactory()}
-          pagination={paginationFactory()}
           />
         <br></br>
         <br></br>
