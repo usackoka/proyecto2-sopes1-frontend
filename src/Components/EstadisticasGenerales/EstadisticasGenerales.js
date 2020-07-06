@@ -39,7 +39,7 @@ class EstadisticasGenerales extends React.Component {
     const getData = async () => {
       const data = await apiGet.generalData.getCasos();
       this.setState({...this.state,formData:data.data})
-      this.setState({...this.state,ultimoDato:[data.data[data.data.length]]})
+      this.setState({...this.state,ultimoDato:[data.data[data.data.length-1]]})
       
       //cargo el gráfico de barras
       this.graficoBarras = <GraficaBarras data={data.data}/>
